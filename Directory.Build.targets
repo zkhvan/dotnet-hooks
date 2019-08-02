@@ -1,7 +1,17 @@
 <Project>
-  <Target Name="InstallNpmPackages" AfterTargets="Restore;CollectPackageReferences">
+  <PropertyGroup>
+    <WorkspaceDir>$(SolutionDir)..</WorkspaceDir>
+    <NpmPackageDir>$(WorkspaceDir)\node_modules</NpmPackageDir>
+  </PropertyGroup>
+
+  <Target
+    Condition="Exists('$(WorkspaceDir)')"
+    Name="InstallNpmPackages"
+    BeforeTargets="CollectPackageReferences"
+  >
     <Exec
-      WorkingDirectory="$(SolutionDir)"
+      Condition="!Exists('$(NpmPackageDir)\success')"
+      WorkingDirectory="$(WorkspaceDir)"
       Command="npm install"
     />
   </Target>
