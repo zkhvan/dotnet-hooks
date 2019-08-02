@@ -1,0 +1,8 @@
+<Project>
+  <Target Name="InstallNpmPackages" AfterTargets="Restore;CollectPackageReferences">
+    <Exec
+      WorkingDirectory="$(SolutionDir)"
+      Command="npm install"
+    />
+  </Target>
+</Project>
